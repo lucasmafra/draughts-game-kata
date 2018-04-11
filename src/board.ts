@@ -1,42 +1,34 @@
 import {Square} from "./square"
-import {Color} from "./color"
-const ROWS = 10
-const COLS = 10
+import {ColorEnum} from "./color"
+import {Matrix} from "./matrix"
 
 export class Board {
 
-    private readonly positions: Array<Array<Square>>
+    public readonly squares: Matrix<Square>
+    private readonly ROWS = 10
+    private readonly COLS = 10
 
     constructor() {
-        this.positions = this.initializePositions()
+        this.squares = this.initializeSquares()
     }
 
     public squareAt(col: number, row: number): Square {
-        return this.positions[col - 1][row - 1]
+        return this.squares.get(col, row)
     }
 
-    public get cols(): number {
-        return COLS
+    private initializeSquares() {
+        const squares: Matrix<Square> = Matrix.of(this.ROWS, this.COLS)
+        squares.forEach((square, row, col) => {
+            square = this.isDarkPosition(row,col)
+                ? new Square(ColorEnum.DARK)
+                : new Square(ColorEnum.LIGHT)
+            squares.set(square, row, col)
+        })
+        return squares
     }
 
-    public get rows(): number {
-        return ROWS
+    private isDarkPosition(row: number, col: number) {
+        return (row + col) % 2 === 0
     }
 
-    private initializePositions() {
-        const positions: Array<Array<Square>> = this.createMatrix()
-        let currentColor = Color.dark()
-        for (let i = 0; i < COLS; i++) {
-            for (let j = 0; j < ROWS; j++) {
-                positions[i][j] = new Square(currentColor)
-                currentColor = Color.toggle(currentColor)
-            }
-            currentColor = Color.toggle(currentColor)
-        }
-        return positions
-    }
-
-    private createMatrix() {
-        return Array.from(Array(COLS), () => Array.from(Array(ROWS)))
-    }
 }

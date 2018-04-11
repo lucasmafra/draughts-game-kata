@@ -2,7 +2,7 @@ import {ColorEnum} from "./color"
 
 export class Square {
 
-    public color: ColorEnum
+    public readonly color: ColorEnum
 
     constructor(color: ColorEnum) {
         this.color = color
