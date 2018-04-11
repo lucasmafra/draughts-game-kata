@@ -7,6 +7,8 @@ This is a TypeScript implementation of the famous board game Draughts
 * The game is played on a board with 10×10 squares, alternating dark and light. The lower-leftmost square should be dark.
 * Each player has 20 pieces. In the starting position (see illustration) the pieces are placed on the first four rows closest to the players. This leaves two central rows empty.
 
+![Starting position](starting_position.jpg "Starting position")
+
 ### Moves and captures
 * The player with the light pieces moves first. Then turns alternate.
 * Ordinary pieces move one square diagonally forward to an unoccupied square.
