@@ -1,0 +1,27 @@
+{
+  "name": "draughts-game-kata",
+  "version": "0.0.1",
+  "scripts": {
+    "test": "jest"
+  },
+  "jest": {
+    "transform": {
+      ".(ts)": "<rootDir>/node_modules/ts-jest/preprocessor.js"
+    },
+    "testRegex": "(/test/.*|\\.(test|spec))\\.(ts|js)$",
+    "moduleFileExtensions": [
+      "ts",
+      "js"
+    ],
+    "testEnvironment": "node"
+  },
+  "author": "Lucas Mafra",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/jest": "^22.2.2",
+    "jest": "^22.4.3",
+    "ts-jest": "^22.4.2",
+    "ts-node": "^5.0.1",
+    "typescript": "^2.8.1"
+  }
+}
