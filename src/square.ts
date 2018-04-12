@@ -1,5 +1,5 @@
 import {ColorEnum} from "./color"
-import {Piece} from "./piece";
+import {Piece} from "./piece"
 
 export class Square {
 
