@@ -12,25 +12,25 @@ describe('Square', () => {
     it('should optionally have a piece', () => {
         let square = new Square(ColorEnum.DARK)
         expect(square.piece).toEqual(undefined)
-        square = new Square(ColorEnum.DARK, new Piece())
+        square = new Square(ColorEnum.DARK, new Piece(ColorEnum.LIGHT))
         expect(square.piece).toEqual(expect.anything())
     })
 
     it('should allow adding a piece after its creation', () => {
         const square = new Square(ColorEnum.DARK)
-        square.addPiece(new Piece)
+        square.addPiece(new Piece(ColorEnum.DARK))
         expect(square.piece).toEqual(expect.anything())
     })
 
     it('should allow removing it\'s piece', () => {
-        const square = new Square(ColorEnum.DARK, new Piece())
+        const square = new Square(ColorEnum.DARK, new Piece(ColorEnum.LIGHT))
         square.removePiece()
         expect(square.piece).toEqual(undefined)
     })
 
     it('should not allow adding a piece if it already has one', () => {
-        const square = new Square(ColorEnum.DARK, new Piece())
-        const throwable = () => square.addPiece(new Piece())
+        const square = new Square(ColorEnum.DARK, new Piece(ColorEnum.LIGHT))
+        const throwable = () => square.addPiece(new Piece(ColorEnum.LIGHT))
         expect(throwable).toThrow('Already have a piece')
     })
 
@@ -39,4 +39,6 @@ describe('Square', () => {
         const throwable = () => square.removePiece()
         expect(throwable).toThrow('No piece to remove')
     })
+
+
 })

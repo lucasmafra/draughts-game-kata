@@ -6,15 +6,10 @@ export class Square {
     public readonly color: ColorEnum
     private _piece: Piece | undefined
 
-    constructor(color: ColorEnum)
-
-    constructor(color: ColorEnum, piece: Piece)
-
-    constructor(...args: any[]) {
-        this.color = args[0]
-        this._piece = args[1]
+    constructor(color: ColorEnum, piece?: Piece) {
+        this.color = color
+        this._piece = piece
     }
-
 
     public get piece(): Piece | undefined {
         return this._piece

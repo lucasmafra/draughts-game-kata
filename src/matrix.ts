@@ -13,7 +13,7 @@ export class Matrix<T> {
     }
 
     static of<T>(rows: number, cols: number): Matrix<T> {
-        this.validateNumberOfRowsAndCols(rows,cols)
+        this.ensureNonNegativeRowsAndCols(rows,cols)
         return new Matrix<T>(rows, cols)
     }
 
@@ -26,17 +26,17 @@ export class Matrix<T> {
     }
 
     get(row: number, col: number) {
-        this.validateIndex(row,col)
+        this.ensureValidIndex(row,col)
         return this.matrix[row-this.INITIAL_ROW][col-this.INITIAL_COL]
     }
 
     set(element: T, row: number, col: number) {
-        this.validateIndex(row,col)
+        this.ensureValidIndex(row,col)
         this.matrix[row-1][col-1] = element
     }
 
 
-    private validateIndex(row: number, col: number) {
+    private ensureValidIndex(row: number, col: number) {
         if (!this.isValidIndex(row, col)) {
             throw new Error(`Invalid index: (${row}, ${col})`)
         }
@@ -51,7 +51,7 @@ export class Matrix<T> {
         return a <= n && b >= n
     }
 
-    private static validateNumberOfRowsAndCols(rows: number, cols: number) {
+    private static ensureNonNegativeRowsAndCols(rows: number, cols: number) {
         if (rows < 0 || cols < 0) {
             throw new Error('Rows and cols must be greater than or equal to 0')
         }
