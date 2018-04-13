@@ -15,43 +15,37 @@ export class Board {
     }
 
     public squareAt(position: Position): Square {
-        return this.squares.get(position.row, position.col)
+        return this.squares.get(position)
     }
 
     public move(from: Position, to: Position) {
         const origin = this.squareAt(from)
         const destination = this.squareAt(to)
-        const piece = this.clone(origin.piece!)
+        destination.addPiece(origin.piece!)
         origin.removePiece()
-        destination.addPiece(piece)
     }
 
     private initializeSquares() {
         const squares: Matrix<Square> = Matrix.of(this.ROWS, this.COLS)
-        squares.forEach((square, row, col) => {
-            square = this.shouldBeDarkSquare({row,col})
-                ? new Square(ColorEnum.DARK, this.initializePieceAt(row))
-                : new Square(ColorEnum.LIGHT, undefined)
-            squares.set(square, row, col)
+        squares.forEach((position) => {
+            const squareColor = this.colorForPosition(position)
+            const piece = squareColor === ColorEnum.DARK ? this.pieceForPosition(position) : undefined
+            squares.set(new Square(squareColor, piece), position)
         })
         return squares
     }
 
-    private initializePieceAt(row: number): Piece | undefined {
-        const belongsToFirstFourRows = row <= 4
-        const belongsToLastFourRows = this.ROWS - row < 4
-        if (belongsToFirstFourRows) {
-            return new Piece(ColorEnum.LIGHT)
-        } else if (belongsToLastFourRows) {
-            return new Piece(ColorEnum.DARK)
-        }
+    private colorForPosition(position: Position): ColorEnum {
+        const shouldBeDarkSquare = (position.row + position.col) % 2 === 0
+        return shouldBeDarkSquare ? ColorEnum.DARK : ColorEnum.LIGHT
     }
 
-    private shouldBeDarkSquare(position: Position) {
-        return (position.row + position.col) % 2 === 0
+    private pieceForPosition(position: Position): Piece | undefined {
+        const shouldBeLightPiece = position.row <= 4
+        const shouldBeDarkPiece = this.ROWS - position.row < 4
+        return shouldBeDarkPiece ? new Piece(ColorEnum.DARK) :
+               shouldBeLightPiece ? new Piece(ColorEnum.LIGHT) :
+               undefined
     }
 
-    private clone(piece: Piece) {
-        return Object.assign({}, piece)
-    }
 }

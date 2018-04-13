@@ -1,6 +1,6 @@
 import {Board} from "../src/board"
 import {ColorEnum} from "../src/color"
-import {Position} from "../src/position";
+import {Position} from "../src/position"
 
 describe('Board', () => {
 
@@ -36,7 +36,7 @@ describe('Board', () => {
         expect(board.squareAt(pos(2, 2)).color).toBe(ColorEnum.DARK)
     })
 
-    it('no light square can contain any piece', () => {
+    it('should not have a piece in any light square', () => {
         piecesAt(
             pos(1,2),  pos(1,4),  pos(1,6),  pos(1,8),  pos(1,10),
             pos(2,1),  pos(2,3),  pos(2,5),  pos(2,7),  pos(2,9),
@@ -69,7 +69,7 @@ describe('Board', () => {
         ).forEach((piece) => expect(piece!.color).toBe(ColorEnum.DARK))
     })
 
-    it('should leave the two central rows empty', () => {
+    it('initialize the two central rows as empty', () => {
         piecesAt(
             pos(5,1),  pos(5,3),  pos(5,5), pos(5,7), pos(5,9),
             pos(6,2),  pos(6,4),  pos(6,6), pos(6,8), pos(6,10),

@@ -28,17 +28,4 @@ describe('Square', () => {
         expect(square.piece).toEqual(undefined)
     })
 
-    it('should not allow adding a piece if it already has one', () => {
-        const square = new Square(ColorEnum.DARK, new Piece(ColorEnum.LIGHT))
-        const throwable = () => square.addPiece(new Piece(ColorEnum.LIGHT))
-        expect(throwable).toThrow('Already have a piece')
-    })
-
-    it('should not allow removing a nonexistent piece', () => {
-        const square = new Square(ColorEnum.DARK)
-        const throwable = () => square.removePiece()
-        expect(throwable).toThrow('No piece to remove')
-    })
-
-
 })

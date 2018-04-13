@@ -16,24 +16,11 @@ export class Square {
     }
 
     public addPiece(piece: Piece) {
-        this.ensureHasNoPiece()
-        this._piece = piece
+        this._piece = Object.assign(piece) // create a new instance of the object
     }
 
     public removePiece() {
-        this.ensureHasPiece()
         this._piece = undefined
     }
 
-    private ensureHasNoPiece() {
-        if (this.piece) {
-            throw new Error('Already have a piece')
-        }
-    }
-
-    private ensureHasPiece() {
-        if (!this.piece) {
-            throw new Error('No piece to remove')
-        }
-    }
 }
