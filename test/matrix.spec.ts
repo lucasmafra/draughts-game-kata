@@ -1,9 +1,7 @@
 import {Matrix} from "../src/matrix"
-import {Position} from '../src/position'
+import {Position, pos} from '../src/position'
 
 describe('Matrix', () => {
-
-    const pos = (row: number, col: number):Position => ({row, col})
 
     it('should create a matrix with correct numbers of rows and cols', () => {
         const matrix = Matrix.of(5, 7)

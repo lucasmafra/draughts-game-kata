@@ -1,6 +1,6 @@
 import {Board} from "../src/board"
 import {ColorEnum} from "../src/color"
-import {Position} from "../src/position"
+import {Position, pos} from "../src/position"
 
 describe('Board', () => {
 
@@ -9,8 +9,6 @@ describe('Board', () => {
     const piecesAt = (...positions: Position[]) => positions
         .map(position => board.squareAt(position))
         .map(square => square.piece)
-
-    const pos = (row: number, col: number): Position => ({row, col})
 
     beforeEach(() => {
         board = new Board()
